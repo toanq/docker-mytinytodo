@@ -1,0 +1,28 @@
+version: '3.9'
+networks:
+    todo:
+        name: todo
+        driver: bridge
+services:
+    tinytodo:
+        image: carcise/docker-mytinytodo:latest
+        build: .
+        container_name: tinytodo
+        volumes:
+            - ./db:/var/www/html/db
+# Uncomment below lines to be able to access from host
+#        ports:
+#            - 8888:80
+        networks:
+            - todo
+        environment:
+            MTT_SALT: ${MTT_SALT}
+        restart: unless-stopped
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.1'
+                    memory: 100M
+                reservations:
+                    cpus: '0.05'
+                    memory: 50M

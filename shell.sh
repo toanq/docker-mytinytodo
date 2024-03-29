@@ -1,1 +1,1 @@
-docker exec -it roger /bin/sh
+docker exec -it tinytodo /bin/sh
